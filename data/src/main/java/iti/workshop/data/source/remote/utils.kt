@@ -1,4 +1,4 @@
-package com.alamiya.weatherapptask.data.source.remote
+package iti.workshop.data.source.remote
 
 import android.content.Context
 import android.net.ConnectivityManager
