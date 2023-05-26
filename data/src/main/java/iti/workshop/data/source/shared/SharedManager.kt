@@ -4,37 +4,44 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 
+const val SHARE_KEY = "shared_user_data"
+const val USER_ID = "id"
+const val USER_NAME = "name"
+const val USER_EMAIL = "email"
+
 class SharedManager private constructor(context: Context) {
-    private var sharedPreferences: SharedPreferences? = null
-    val SHARE_KEY = "shareRoom"
+    private val sharedPreferences: SharedPreferences by lazy { context.getSharedPreferences(SHARE_KEY, Context.MODE_PRIVATE)}
+
+
 
     companion object {
-        const val IS_FIRST = "IS_FIRST"
-        const val USER_INFO = "USER_INFO"
-
         @Volatile
         private var instance: SharedManager? = null
         fun getInstance(context: Context): SharedManager? {
-            if (instance == null) instance = SharedManager(context)
-            return instance
+            synchronized(this){
+                if (instance == null) instance = SharedManager(context)
+                return instance
+            }
         }
-    }
-    init {
-        sharedPreferences = context.getSharedPreferences(SHARE_KEY, Context.MODE_PRIVATE)
     }
 
     fun clearAllData() {
-        val editor = sharedPreferences!!.edit()
+        val editor = sharedPreferences.edit()
         editor.clear()
         editor.apply()
     }
 
-    fun saveUser(userId:String, name:String) {
-        val editor = sharedPreferences!!.edit()
-        editor.putString("userId",userId)
-        editor.putString("name",name)
+    fun saveUser(userId:String, name:String,email:String) {
+        val editor = sharedPreferences.edit()
+        editor.putString(USER_ID,userId)
+        editor.putString(USER_NAME,name)
+        editor.putString(USER_EMAIL,email)
         editor.apply()
     }
 
 
+    val isUser: Boolean
+        get() = sharedPreferences.contains(USER_ID)
+
 }
+

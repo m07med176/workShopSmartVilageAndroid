@@ -7,7 +7,7 @@ import iti.workshop.data.source.remote.IRemoteDataSource
 import iti.workshop.data.source.shared.SharedManager
 
 class Repository(
-    val context: Context,
+    val shared: SharedManager,
     val local: ILocalDataSource,
     val remote: IRemoteDataSource
 ) : IRepository {
@@ -25,9 +25,7 @@ class Repository(
     }
 
 
-    fun savedLoginData(userId:String, name:String){
-        SharedManager.getInstance(context)?.let {
-            it.saveUser(userId,name)
-        }
+    fun savedLoginData(userId:String, name:String,email:String){
+        shared.saveUser(userId,name,email)
     }
 }
