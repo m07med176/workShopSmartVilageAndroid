@@ -1,7 +1,7 @@
 package iti.workshop.data.source
 
 object Constants {
-    const val BASE_URL = "put url here"
+    const val BASE_URL = "https://newsapi.org/v2/top-headlines"
     const val API_KEY = "api key here"
 
     // Network and Room cash
