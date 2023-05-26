@@ -5,11 +5,13 @@
     android:id="@+id/nav"
     app:startDestination="@id/splashFragment">
 
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="iti.workshop.newApp.login.LoginFragment"
         android:label="LoginFragment" />
-    <fragment
+
+<fragment
         android:id="@+id/splashFragment"
         android:name="iti.workshop.newApp.splash.SplashFragment"
         android:label="SplashFragment" >
@@ -27,4 +29,5 @@
         android:name="iti.workshop.newApp.dashboard.DashBoardFragment"
         android:label="fragment_dash_board"
         tools:layout="@layout/fragment_dash_board" />
+
 </navigation>
