@@ -3,12 +3,10 @@ package iti.workshop.data.source.shared
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import iti.workshop.data.source.dto.User
 
 const val SHARE_KEY = "shared_user_data"
-const val USER_ID = "id"
-const val USER_NAME = "name"
-const val USER_EMAIL = "email"
-
+const val USER_INFO = "USER_INFO"
 class SharedManager private constructor(context: Context) {
     private val sharedPreferences: SharedPreferences by lazy { context.getSharedPreferences(SHARE_KEY, Context.MODE_PRIVATE)}
 
@@ -25,23 +23,33 @@ class SharedManager private constructor(context: Context) {
         }
     }
 
-    fun clearAllData() {
+    fun clearUser() {
         val editor = sharedPreferences.edit()
-        editor.clear()
-        editor.apply()
-    }
-
-    fun saveUser(userId:String, name:String,email:String) {
-        val editor = sharedPreferences.edit()
-        editor.putString(USER_ID,userId)
-        editor.putString(USER_NAME,name)
-        editor.putString(USER_EMAIL,email)
+        editor.remove(USER_INFO)
         editor.apply()
     }
 
 
-    val isUser: Boolean
-        get() = sharedPreferences.contains(USER_ID)
+    fun saveUser(user: User?) {
+        val editor = sharedPreferences.edit()
+        editor.putString(USER_INFO, Gson().toJson(user))
+        editor.apply()
 
+    }
+
+
+    fun getUser(): User {
+        val userStr = sharedPreferences.getString(USER_INFO, null)
+        var user = User()
+        if (userStr != null) {
+            user = Gson().fromJson(userStr, User::class.java)
+        }
+        return user
+    }
+
+    fun isUserSavedLogging(): Boolean{
+        return sharedPreferences.contains(USER_INFO)
+    }
 }
+
 
