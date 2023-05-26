@@ -1,4 +1,4 @@
-package iti.workshop.domain.models.reg
+package iti.workshop.data.source.remote.models
 
 data class RegBody(
     val displayName: String,

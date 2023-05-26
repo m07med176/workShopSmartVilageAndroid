@@ -2,6 +2,7 @@ package iti.workshop.data.repository
 
 import android.content.Context
 import android.content.SharedPreferences
+import iti.workshop.data.source.dto.User
 import iti.workshop.data.source.local.ILocalDataSource
 import iti.workshop.data.source.remote.IRemoteDataSource
 import iti.workshop.data.source.shared.SharedManager
@@ -25,7 +26,7 @@ class Repository(
     }
 
 
-    fun savedLoginData(userId:String, name:String,email:String){
-        shared.saveUser(userId,name,email)
+    fun savedLoginData(user:User){
+        shared.saveUser(user)
     }
 }
