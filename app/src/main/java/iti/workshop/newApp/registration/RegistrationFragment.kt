@@ -10,16 +10,6 @@ import android.widget.EditText
 import iti.workshop.newApp.R
 import iti.workshop.newApp.helpers.ValidationReg
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [RegistrationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RegistrationFragment : Fragment() {
 lateinit var userName:EditText
 lateinit var password:EditText
@@ -39,7 +29,7 @@ lateinit var submit:Button
             if (ValidationReg.validateData(password.text.toString(),email.text.toString(),confPassword.text.toString())){
 
             }else{
-                
+
             }
         })
     }
@@ -54,7 +44,6 @@ fun init(view:View){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_registration, container, false)
     }
 
