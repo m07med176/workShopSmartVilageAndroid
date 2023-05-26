@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface RepositoryInterface {
     suspend fun getNews(apiKey:String, country:String): Flow<List<Article>>
-    suspend fun regUser(body: RegBody):Boolean
+
 }
 
 

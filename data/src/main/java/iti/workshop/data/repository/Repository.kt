@@ -19,8 +19,5 @@ class Repository(
         emit(remoteDAtaSource.api.getNews(apiKey,country).articles)
     }
 
-    override suspend fun regUser(body: RegBody):Boolean {
-       val reg= remoteDAtaSource.api.register(body)
-        return reg?.displayName!=null
-    }
+
 }
