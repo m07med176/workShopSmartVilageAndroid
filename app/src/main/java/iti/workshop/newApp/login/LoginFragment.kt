@@ -1,17 +1,28 @@
 package iti.workshop.newApp.login
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import iti.workshop.data.source.remote.models.login.LoginBody
+import iti.workshop.data.source.remote.models.regieter.RegisterBody
 import iti.workshop.newApp.R
 import iti.workshop.newApp.databinding.FragmentLoginBinding
+import iti.workshop.newApp.registration.RegistrationViewModel
+import iti.workshop.newApp.states.LoginState
+import iti.workshop.newApp.states.RegisterState
+import kotlinx.coroutines.launch
 
 
 class LoginFragment : Fragment() {
     lateinit var binding : FragmentLoginBinding
+    val viewModel: LoginViewModel by viewModels { LoginViewModel.Factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +42,10 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.signUpTxtView.setOnClickListener{
+            findNavController().navigate(R.id.action_loginFragment_to_registrationFragment2)
 
+        }
 
         binding.buttonlogin.setOnClickListener{
             login()
@@ -50,34 +64,63 @@ class LoginFragment : Fragment() {
         val email: String = binding.emailloginEditTxt.getText().toString()
         val password: String = binding.passwordloginEditTxt.getText().toString()
 
-        /*   if (!email.isEmpty() && !password.isEmpty()) {
-               Toast.makeText(activity, email +  password, Toast.LENGTH_SHORT).show()
-
-           } else {
-               Toast.makeText(activity, "All Fields Required", Toast.LENGTH_SHORT).show()
-           }*/
 
         val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
         val isEmailValid = email.matches(emailPattern.toRegex())
 
         val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$"
         val isPasswordValid = password.matches(passwordPattern.toRegex())
-        if (!isEmailValid) {
+        if (!isEmailValid || !isPasswordValid) {
+              lifecycleScope.launch {
+                  viewModel.logInUser(LoginBody(email,password, false))
+                  viewModel.loginStatus.collect {
+                      when (it) {
+                          is LoginState.Success -> {
+                              Toast.makeText(requireContext(), "Done", Toast.LENGTH_LONG).show()
+                              Log.i("TAG2", "DONE: ")
+                              findNavController().navigate(R.id.action_loginFragment_to_newsListFragment)
+                          }
+
+                          is LoginState.Loading -> {
+                              Toast.makeText(requireContext(), "Loading", Toast.LENGTH_LONG)
+                                  .show()
+                              Log.i("TAG2", "LOADING: ")
+
+                          }
+
+                          is LoginState.Failure -> {
+                             Toast.makeText(
+                                  requireContext(), "Credential  not valide", Toast.LENGTH_LONG
+                              ).show()
+                              Log.i("TAG2", "${it.error.toString()}")
+
+                          }
+
+                          else -> {
+                              println("TEEEE")
+                          }
+                      }
+                  }
+
+              }
+           } else {
+               Toast.makeText(activity, "All Fields Required", Toast.LENGTH_SHORT).show()
+           }
+
+      /*  val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+        val isEmailValid = email.matches(emailPattern.toRegex())
+
+        val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$"
+        val isPasswordValid = password.matches(passwordPattern.toRegex())
+        if (!isEmailValid || !isPasswordValid) {
             //  binding.emailloginEditTxt.error = "Invalid email address"
-            Toast.makeText(activity, "Email Required", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "invalide input", Toast.LENGTH_SHORT).show()
 
         }else{
             Toast.makeText(activity, email, Toast.LENGTH_SHORT).show()
 
-        }
+        }*/
 
-        if (!isPasswordValid) {
-            Toast.makeText(activity, "password Required", Toast.LENGTH_SHORT).show()
-
-            //   binding.passwordloginEditTxt.error = "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character"
-        }else{
-            Toast.makeText(activity,   password, Toast.LENGTH_SHORT).show()
-        }
     }
 
 }

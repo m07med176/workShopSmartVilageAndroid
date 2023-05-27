@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import iti.workshop.data.source.remote.models.regieter.RegisterBody
 import iti.workshop.newApp.MainActivity
 import iti.workshop.newApp.R
@@ -32,18 +33,23 @@ class RegistrationFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
     }
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentRegistrationBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = this
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.loginTxtView.setOnClickListener{
+            findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
+
+        }
+
         networkState = NetWorkChecker(requireContext())
         binding.submit.setOnClickListener(View.OnClickListener {
             if(!ValidationReg.validateData(
@@ -76,21 +82,21 @@ class RegistrationFragment : Fragment() {
                     viewModel.regbool.collect {
                         when (it) {
                             is RegisterState.Success -> {
-                                Toast.makeText(requireContext(), "Done", Toast.LENGTH_LONG).show()
+                                Toast.makeText(requireContext(), "Sign up Successful", Toast.LENGTH_LONG).show()
                                 Log.i("TAG2", "DONE: ")
+                                findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
                             }
 
                             is RegisterState.Loading -> {
-                                Toast.makeText(requireContext(), "Loading", Toast.LENGTH_LONG)
-                                    .show()
+                              //  Toast.makeText(requireContext(), "Loading", Toast.LENGTH_LONG).show()
                                 Log.i("TAG2", "LOADING: ")
 
                             }
 
                             is RegisterState.Failure -> {
                                 Toast.makeText(
-                                    requireContext(), "${it.error.toString()}", Toast.LENGTH_LONG
-                                ).show()
+                                requireContext(), "Credential  not valide", Toast.LENGTH_LONG
+                            ).show()
                                 Log.i("TAG2", "${it.error.toString()}")
 
                             }

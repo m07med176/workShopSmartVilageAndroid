@@ -37,7 +37,7 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Login"
+                    android:text="Sign Up"
                     android:textColor="#fe5b52"
                     android:textAlignment="center"
                     android:gravity="center"
@@ -68,6 +68,7 @@
                     android:layout_marginTop="10dp"
                     android:paddingStart="20dp"
                     android:hint="Enter Your Name"
+                    android:textColor="@color/black"
                     android:textSize="17dp" />
                 <TextView
 
@@ -91,6 +92,7 @@
                     android:layout_marginEnd="30dp"
                     android:layout_marginTop="10dp"
                     android:paddingStart="20dp"
+                    android:textColor="@color/black"
                     android:hint="Enter Your Email"
                     android:textSize="17dp" />
 
@@ -115,6 +117,7 @@
                     android:inputType="textPassword"
                     android:layout_marginStart="30dp"
                     android:layout_marginEnd="30dp"
+                    android:textColor="@color/black"
                     android:layout_marginTop="10dp"
                     android:paddingStart="20dp"
                     android:textSize="17dp" />
@@ -139,6 +142,7 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginEnd="30dp"
                     android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
                     android:paddingStart="20dp"
                     android:textSize="17dp" />
 
