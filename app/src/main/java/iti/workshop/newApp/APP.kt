@@ -1,6 +1,7 @@
-package iti.workshop.newApp.di
+package iti.workshop.newApp
 
 import android.app.Application
+import iti.workshop.newApp.di.AppDependency
 
 class APP: Application() {
     lateinit var  appDependency: Unit

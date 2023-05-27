@@ -1,10 +1,8 @@
-package iti.workshop.newApp.helpers
-
-import android.provider.ContactsContract.CommonDataKinds.Email
+package iti.workshop.newApp.utils
 
 object ValidationReg {
     fun validateData(password:String,email: String,confPassword:String):Boolean{
-        if (validateEmail(email)&& validatePassword(password,confPassword)){
+        if (validateEmail(email) && validatePassword(password,confPassword)){
             return true
         }else{
             return false

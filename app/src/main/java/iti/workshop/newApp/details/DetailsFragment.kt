@@ -8,11 +8,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import iti.workshop.data.source.dto.Article
-import iti.workshop.newApp.R
 import iti.workshop.newApp.databinding.FragmentDetailsBinding
-import iti.workshop.newApp.databinding.FragmentLoginBinding
 import iti.workshop.newApp.di.AppDependency
-import kotlinx.coroutines.launch
 
 class DetailsFragment : Fragment() {
 
@@ -26,9 +23,9 @@ class DetailsFragment : Fragment() {
     ): View {
 
         viewModel = ViewModelProvider(requireActivity(),DetailsViewModelFactory(
-            delete = AppDependency.deleteFavorite,
+            delete = AppDependency.deleteFavoriteUseCase,
             insert = AppDependency.insetFavorite,
-            checkIsExist = AppDependency.checkFavoriteExist
+            checkIsExist = AppDependency.checkFavoriteExistUseCase
         ))[DetailsViewModel::class.java]
 
         binding = FragmentDetailsBinding.inflate(layoutInflater, container, false)

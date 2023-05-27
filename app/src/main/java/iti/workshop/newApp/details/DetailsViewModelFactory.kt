@@ -3,14 +3,14 @@ package iti.workshop.newApp.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import iti.workshop.domain.usecases.CheckFavoriteExist
-import iti.workshop.domain.usecases.DeleteFavorite
-import iti.workshop.domain.usecases.InsertFavorite
+import iti.workshop.domain.usecases.CheckFavoriteExistUseCase
+import iti.workshop.domain.usecases.DeleteFavoriteUseCase
+import iti.workshop.domain.usecases.InsertFavoriteUseCase
 
 class DetailsViewModelFactory(
-    private val insert: InsertFavorite,
-    private val delete: DeleteFavorite,
-    private val checkIsExist: CheckFavoriteExist
+    private val insert: InsertFavoriteUseCase,
+    private val delete: DeleteFavoriteUseCase,
+    private val checkIsExist: CheckFavoriteExistUseCase
     ): ViewModelProvider.Factory{
     override fun <T:ViewModel> create(modelClass: Class<T>):T{
         if(modelClass.isAssignableFrom(DetailsViewModel::class.java)){
