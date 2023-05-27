@@ -1,4 +1,4 @@
-package iti.workshop.newApp
+package iti.workshop.newApp.utils
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

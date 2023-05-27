@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import iti.workshop.newApp.R
-import iti.workshop.newApp.helpers.ValidationReg
+import iti.workshop.newApp.utils.ValidationReg
 
 class RegistrationFragment : Fragment() {
 lateinit var userName:EditText
