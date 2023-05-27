@@ -1,7 +1,7 @@
 package iti.workshop.data.source.local
 
-import iti.workshop.data.source.local.room.FavoriteDao
+import iti.workshop.data.source.local.room.ArticlesDao
 
-class LocalDataSource(private val dao:FavoriteDao) : ILocalDataSource {
+class LocalDataSource(private val dao:ArticlesDao) : ILocalDataSource {
 
 }

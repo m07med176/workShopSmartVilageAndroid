@@ -1,18 +1,20 @@
 package iti.workshop.data.repository
 
 import android.content.Context
+import android.content.SharedPreferences
+import iti.workshop.data.source.dto.User
 import iti.workshop.data.source.local.ILocalDataSource
 import iti.workshop.data.source.remote.IRemoteDataSource
+import iti.workshop.data.source.shared.SharedManager
 
 class Repository(
-    val context: Context,
+    val shared: SharedManager,
     val local: ILocalDataSource,
     val remote: IRemoteDataSource
 ) : IRepository {
     override fun login(username: String, password: String) {
         TODO("Not yet implemented")
     }
-
 
     override fun signUp() {
         TODO("Not yet implemented")
@@ -22,4 +24,8 @@ class Repository(
         TODO("Not yet implemented")
     }
 
+
+    fun savedLoginData(user:User){
+        shared.saveUser(user)
+    }
 }

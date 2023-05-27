@@ -4,15 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import iti.workshop.data.source.dto.Article
 
 @Database(
-    entities = [FavoriteEntity::class],
+    entities = [Article::class],
     version = 1,
     exportSchema = false
 )
 
 abstract class RoomDB : RoomDatabase() {
-    abstract fun cashDao(): FavoriteDao
+    abstract fun cashDao(): ArticlesDao
 
     companion object {
         @Volatile

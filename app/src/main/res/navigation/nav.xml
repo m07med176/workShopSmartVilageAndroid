@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/splashFragment">
+
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="iti.workshop.newApp.login.LoginFragment"
         android:label="LoginFragment" />
+
+<fragment
+
+        android:id="@+id/splashFragment"
+        android:name="iti.workshop.newApp.splash.SplashFragment"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/splashFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_dashBoardFragment"
+            app:destination="@id/dashBoardFragment"
+            app:popUpTo="@id/splashFragment" />
+    </fragment>
+  
+    <fragment
+        android:id="@+id/dashBoardFragment"
+        android:name="iti.workshop.newApp.dashboard.DashBoardFragment"
+        android:label="fragment_dash_board"
+        tools:layout="@layout/fragment_dash_board" />
+
 </navigation>
