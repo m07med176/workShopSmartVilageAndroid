@@ -14,6 +14,8 @@ import androidx.lifecycle.lifecycleScope
 import iti.workshop.data.source.remote.models.regieter.RegisterBody
 import iti.workshop.newApp.MainActivity
 import iti.workshop.newApp.R
+import iti.workshop.newApp.databinding.FragmentLoginBinding
+import iti.workshop.newApp.databinding.FragmentRegistrationBinding
 
 import iti.workshop.newApp.states.RegisterState
 import iti.workshop.newApp.utils.ValidationReg
@@ -21,31 +23,36 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class RegistrationFragment : Fragment() {
-    lateinit var userName: EditText
-    lateinit var password: EditText
-    lateinit var confPassword: EditText
-    lateinit var email: EditText
-    lateinit var submit: Button
+
+  lateinit var binding : FragmentRegistrationBinding
+
     val viewModel: RegistrationViewModel by viewModels { RegistrationViewModel.Factory }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
-
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        binding = FragmentRegistrationBinding.inflate(layoutInflater, container, false)
+        binding.lifecycleOwner = this
+        return binding.root
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init(view)
-        submit.setOnClickListener(View.OnClickListener {
+        binding.submit.setOnClickListener(View.OnClickListener {
             if (ValidationReg.validateData(
-                    password.text.toString(), email.text.toString(), confPassword.text.toString()
+                    binding.passWord.text.toString(), binding.email.text.toString(), binding.confPassword.text.toString()
                 )
             ) {
                 lifecycleScope.launch {
                     viewModel.regUser(
                         RegisterBody(
-                            userName.text.toString(),
-                            email.text.toString(),
-                            password.text.toString(),
+                            binding.userName.text.toString(),
+                            binding.email.text.toString(),
+                            binding.passWord.text.toString(),
                             false
                         )
                     )
@@ -86,19 +93,7 @@ class RegistrationFragment : Fragment() {
         })
     }
 
-    fun init(view: View) {
-        userName = view.findViewById(R.id.userName)
-        password = view.findViewById(R.id.passWord)
-        email = view.findViewById(R.id.email)
-        submit = view.findViewById(R.id.submit)
-        confPassword = view.findViewById(R.id.confPassword)
 
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_registration, container, false)
-    }
 
 }
