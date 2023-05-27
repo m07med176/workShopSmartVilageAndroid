@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import iti.workshop.data.source.Constants
 import iti.workshop.newApp.di.AppDependency
@@ -41,20 +42,46 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
+        menuInflater.inflate(R.menu.action_bar,menu)
+
         inflater.inflate(R.menu.home_menu, menu)
         return true
     }
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.logout) {
             //-------------To Delete Plan Table -----------------------
             val sharedManager = SharedManager.getInstance(this)!!
-             sharedManager.clearUser()
+            sharedManager.clearUser()
             this@MainActivity.finish()
+        }
+        when (item.itemId) {
+            R.id.search -> {
+                val navHostFragment =
+                    supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+                val navController = navHostFragment.navController
+                navController.navigate(R.id.action_splashFragment_to_dashBoardFragment)
+                return true
+            }
+
+            R.id.favourite -> //add the function to perform here
+            {
+                val navHostFragment =
+                    supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+                val navController = navHostFragment.navController
+                navController.navigate(R.id.action_splashFragment_to_dashBoardFragment)
+                return true
+
+            }
+
+
+
+
+
         }
         return super.onOptionsItemSelected(item)
     }
-
-
 }
 

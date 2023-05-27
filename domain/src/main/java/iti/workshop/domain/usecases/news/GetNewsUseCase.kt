@@ -4,6 +4,6 @@ import iti.workshop.data.repository.news.NewsRepositoryInterface
 
 class GetNewsUseCase(private val newsRepository: NewsRepositoryInterface) {
 
-    suspend operator fun invoke(apiKey:String,country:String)=newsRepository.getNews(apiKey,country)
+    suspend operator fun invoke(apiKey:String = "34c6c06803ef436d8778bd668d5cdb65",country:String="us")=newsRepository.getNews(apiKey,country)
 
 }
