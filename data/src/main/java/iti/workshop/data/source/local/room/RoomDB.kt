@@ -13,7 +13,7 @@ import iti.workshop.data.source.dto.Article
 )
 
 abstract class RoomDB : RoomDatabase() {
-    abstract fun cashDao(): ArticlesDao
+    abstract fun articleDao(): ArticlesDao
 
     companion object {
         @Volatile
