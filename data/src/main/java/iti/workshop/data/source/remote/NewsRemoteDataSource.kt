@@ -1,6 +1,6 @@
 package iti.workshop.data.source.remote
 
-import iti.workshop.data.source.remote.models.news.NewsResponse
+import iti.workshop.data.source.dto.NewsResponse
 import iti.workshop.data.source.remote.retrofit.NewsApi
 
 import kotlinx.coroutines.flow.Flow

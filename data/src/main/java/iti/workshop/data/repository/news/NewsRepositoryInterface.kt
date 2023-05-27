@@ -1,18 +1,14 @@
-package iti.workshop.data.repository
+package iti.workshop.data.repository.news
 
-import android.content.Context
+
+
 import iti.workshop.data.source.dto.Article
-import iti.workshop.data.source.local.ILocalDataSource
-
 import kotlinx.coroutines.flow.Flow
 
-interface IRepository{
+interface NewsRepositoryInterface {
+    suspend fun getNews(apiKey:String, country:String): Flow<List<Article>>
     fun getArticles(): Flow<List<Article>>
-
     suspend fun insertArticle(article: Article)
-
     suspend fun deleteArticle(article: Article)
-
     fun isExists(title: String): Flow<Boolean>
-
 }

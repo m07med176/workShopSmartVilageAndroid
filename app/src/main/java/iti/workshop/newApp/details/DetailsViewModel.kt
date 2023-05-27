@@ -3,15 +3,15 @@ package iti.workshop.newApp.details
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import iti.workshop.data.source.dto.Article
-import iti.workshop.domain.usecases.CheckFavoriteExistUseCase
-import iti.workshop.domain.usecases.DeleteFavoriteUseCase
-import iti.workshop.domain.usecases.InsertFavoriteUseCase
+import iti.workshop.domain.usecases.news.CheckFavoriteExistUseCase
+import iti.workshop.domain.usecases.news.DeleteFavoriteUseCase
+import iti.workshop.domain.usecases.news.InsertFavoriteUseCase
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class DetailsViewModel(
     val insert: InsertFavoriteUseCase,
-    val delete:DeleteFavoriteUseCase,
+    val delete: DeleteFavoriteUseCase,
     val checkIsExist: CheckFavoriteExistUseCase
 )
     :ViewModel() {

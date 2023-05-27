@@ -2,15 +2,14 @@ package iti.workshop.newApp.registration
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import iti.workshop.data.source.remote.AuthRemoteDataSource
 import iti.workshop.data.source.remote.models.regieter.RegisterBody
 import iti.workshop.data.source.remote.retrofit.RetrofitInstance
-import iti.workshop.data.source.repository.AuthRepository
-import iti.workshop.domain.usecases.RegisterUseCase
+import iti.workshop.data.repository.news.authentication.AuthRepository
+import iti.workshop.domain.usecases.authentication.RegisterUseCase
 import iti.workshop.newApp.states.RegisterState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +17,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class RegistrationViewModel(private val getReg: RegisterUseCase ):ViewModel() {
+class RegistrationViewModel(private val getReg: RegisterUseCase):ViewModel() {
     private val _regbool: MutableStateFlow<RegisterState> = MutableStateFlow(RegisterState.Loading)
     val regbool: StateFlow<RegisterState> = _regbool
     fun regUser(body: RegisterBody){
@@ -44,8 +43,8 @@ companion object {
     val Factory: ViewModelProvider.Factory = viewModelFactory {
         initializer {
             val remoteDataSource=AuthRemoteDataSource(RetrofitInstance.authApi)
-val authRepository=AuthRepository(remoteDataSource)
-val regUser:RegisterUseCase=RegisterUseCase(authRepository)
+val authRepository= AuthRepository(remoteDataSource)
+val regUser: RegisterUseCase = RegisterUseCase(authRepository)
             RegistrationViewModel(
                 getReg = regUser
             )

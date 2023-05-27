@@ -1,6 +1,6 @@
-package iti.workshop.domain.usecases
+package iti.workshop.domain.usecases.news
 
-import iti.workshop.data.repository.NewsRepositoryInterface
+import iti.workshop.data.repository.news.NewsRepositoryInterface
 
 class GetNewsUseCase(private val newsRepository: NewsRepositoryInterface) {
 
