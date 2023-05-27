@@ -7,7 +7,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface CallApi {
-    @POST(Constants.REGISTER_API_URL + "?" + Constants.REGISTER_API_KEY)
+    @POST(Constants.REGISTER_API_URL + "?" + Constants.AUTH_API_KEY)
     suspend fun register(
         @Body body: RegBody
 
