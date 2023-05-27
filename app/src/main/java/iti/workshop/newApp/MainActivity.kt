@@ -1,6 +1,7 @@
 package iti.workshop.newApp
 
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,9 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import iti.workshop.data.source.Constants
+import iti.workshop.newApp.di.AppDependency
+import kotlinx.coroutines.launch
 import iti.workshop.data.source.shared.SharedManager
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +24,12 @@ class MainActivity : AppCompatActivity() {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 
         // Set up the ActionBar with the NavController
+        NavigationUI.setupActionBarWithNavController(this,navController)
+        lifecycleScope.launchWhenCreated {
+            AppDependency.getNewsUseCase.invoke(Constants.NEWS_API_KEY,"us").collect{
+                print(it.size)
+            }
+        }
         NavigationUI.setupActionBarWithNavController(this,navController,appBarConfiguration)
 
     }
