@@ -1,4 +1,4 @@
-package iti.workshop.domain.models.login
+package iti.workshop.data.source.remote.models.login
 
 data class LoginBody(
     val email: String,

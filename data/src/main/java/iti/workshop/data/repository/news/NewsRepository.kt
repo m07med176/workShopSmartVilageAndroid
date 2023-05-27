@@ -1,32 +1,25 @@
-package iti.workshop.data.repository
+package iti.workshop.data.repository.news
 
 import iti.workshop.data.source.dto.Article
-import iti.workshop.data.source.dto.User
 import iti.workshop.data.source.local.ILocalDataSource
-import iti.workshop.data.source.remote.IRemoteDataSource
-import iti.workshop.data.source.shared.SharedManager
+import iti.workshop.data.source.remote.NewsRemoteDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 
-class Repository(
-    val shared: SharedManager,
+class NewsRepository(
+    val remote:NewsRemoteDataSource,
     val local: ILocalDataSource,
-    val remote: IRemoteDataSource,
-    val dispatcher:CoroutineDispatcher = Dispatchers.IO
-) : IRepository {
-    override fun login(username: String, password: String) {
-        TODO("Not yet implemented")
-    }
+    val dispatcher: CoroutineDispatcher = Dispatchers.IO
 
-    override fun signUp() {
-        TODO("Not yet implemented")
-    }
 
-    override fun logout() {
-        TODO("Not yet implemented")
+    ): NewsRepositoryInterface {
+    override suspend fun getNews(apiKey: String, country: String): Flow<List<Article>> = flow {
+        emit(remote.getNews(apiKey,country).articles)
     }
 
     override fun getArticles(): Flow<List<Article>>  = local.getArticles().flowOn(dispatcher)
@@ -45,8 +38,4 @@ class Repository(
 
     override  fun isExists(title: String): Flow<Boolean>  = local.isExists(title).flowOn(Dispatchers.IO)
 
-
-    fun savedLoginData(user:User){
-        shared.saveUser(user)
-    }
 }

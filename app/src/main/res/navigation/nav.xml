@@ -13,12 +13,12 @@
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login" />
 
-<fragment
+    <fragment
 
         android:id="@+id/splashFragment"
         android:name="iti.workshop.newApp.splash.SplashFragment"
         android:label="SplashFragment"
-    tools:layout="@layout/fragment_splash" >
+        tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment"
@@ -27,13 +27,16 @@
             android:id="@+id/action_splashFragment_to_dashBoardFragment"
             app:destination="@id/dashBoardFragment"
             app:popUpTo="@id/splashFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
     </fragment>
-  
+
     <fragment
         android:id="@+id/dashBoardFragment"
         android:name="iti.workshop.newApp.dashboard.DashBoardFragment"
         android:label="fragment_dash_board"
-        tools:layout="@layout/fragment_dash_board" >
+        tools:layout="@layout/fragment_dash_board">
         <action
             android:id="@+id/action_dashBoardFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
@@ -42,7 +45,7 @@
         android:id="@+id/favoriteFragment"
         android:name="iti.workshop.newApp.favorite.FavoriteFragment"
         android:label="FavoriteFragment"
-        tools:layout="@layout/fragment_favorite" >
+        tools:layout="@layout/fragment_favorite">
         <action
             android:id="@+id/action_favoriteFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
@@ -51,10 +54,16 @@
         android:id="@+id/detailsFragment"
         android:name="iti.workshop.newApp.details.DetailsFragment"
         android:label="FragmentDetails"
-        tools:layout="@layout/fragment_details" >
+        tools:layout="@layout/fragment_details">
         <argument
             android:name="article"
             app:argType="iti.workshop.data.source.dto.Article" />
     </fragment>
+
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="iti.workshop.newApp.registration.RegistrationFragment"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration" />
 
 </navigation>

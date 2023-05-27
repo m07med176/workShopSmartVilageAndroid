@@ -3,9 +3,9 @@ package iti.workshop.newApp.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import iti.workshop.domain.usecases.CheckFavoriteExistUseCase
-import iti.workshop.domain.usecases.DeleteFavoriteUseCase
-import iti.workshop.domain.usecases.InsertFavoriteUseCase
+import iti.workshop.domain.usecases.news.CheckFavoriteExistUseCase
+import iti.workshop.domain.usecases.news.DeleteFavoriteUseCase
+import iti.workshop.domain.usecases.news.InsertFavoriteUseCase
 
 class DetailsViewModelFactory(
     private val insert: InsertFavoriteUseCase,
