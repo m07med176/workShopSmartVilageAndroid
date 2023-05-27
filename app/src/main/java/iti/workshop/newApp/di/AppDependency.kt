@@ -11,10 +11,15 @@ import iti.workshop.data.source.remote.RemoteDataSource
 import iti.workshop.data.source.remote.retrofit.CallApi
 import iti.workshop.data.source.remote.retrofit.RetrofitInstance
 import iti.workshop.data.source.shared.SharedManager
+import iti.workshop.domain.usecases.*
 
 object AppDependency {
 
-
+    lateinit var insetFavorite: InsertFavorite
+    lateinit var getNews:GetNews
+    lateinit var deleteFavorite: DeleteFavorite
+    lateinit var checkFavoriteExist: CheckFavoriteExist
+    lateinit var getFavorites:GetFavorites
 
     fun initialization(appContext: Context){
 
@@ -24,7 +29,12 @@ object AppDependency {
         val local = LocalDataSource(db)
         val sharedManager = SharedManager.getInstance(appContext)!!
         val repo = Repository(sharedManager,local,remote)
-        // loginUseCase = LoginUseCase(loginRepo)
+
+        insetFavorite = InsertFavorite(repo)
+        deleteFavorite = DeleteFavorite(repo)
+        getFavorites = GetFavorites(repo)
+        checkFavoriteExist = CheckFavoriteExist(repo)
+        getNews = GetNews()
     }
 
 

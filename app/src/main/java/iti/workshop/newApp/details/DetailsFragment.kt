@@ -11,6 +11,7 @@ import iti.workshop.data.source.dto.Article
 import iti.workshop.newApp.R
 import iti.workshop.newApp.databinding.FragmentDetailsBinding
 import iti.workshop.newApp.databinding.FragmentLoginBinding
+import iti.workshop.newApp.di.AppDependency
 import kotlinx.coroutines.launch
 
 class DetailsFragment : Fragment() {
@@ -23,8 +24,12 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // TODO use dependency Injection
-        //viewModel = ViewModelProvider(requireActivity(),DetailsViewModelFactory())[DetailsViewModel::class.java]
+
+        viewModel = ViewModelProvider(requireActivity(),DetailsViewModelFactory(
+            delete = AppDependency.deleteFavorite,
+            insert = AppDependency.insetFavorite,
+            checkIsExist = AppDependency.checkFavoriteExist
+        ))[DetailsViewModel::class.java]
 
         binding = FragmentDetailsBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = this
