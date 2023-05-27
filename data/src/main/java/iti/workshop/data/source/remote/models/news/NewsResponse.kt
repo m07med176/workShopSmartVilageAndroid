@@ -1,4 +1,4 @@
-package iti.workshop.domain.models.news
+package iti.workshop.data.source.remote.models.news
 
 data class NewsResponse(
     val articles: List<Article>,

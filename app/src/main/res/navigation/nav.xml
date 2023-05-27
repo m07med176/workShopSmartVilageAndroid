@@ -25,12 +25,20 @@
             android:id="@+id/action_splashFragment_to_dashBoardFragment"
             app:destination="@id/dashBoardFragment"
             app:popUpTo="@id/splashFragment" />
-    </fragment>
+    <action
+        android:id="@+id/action_splashFragment_to_registrationFragment"
+        app:destination="@id/registrationFragment" />
+</fragment>
   
     <fragment
         android:id="@+id/dashBoardFragment"
         android:name="iti.workshop.newApp.dashboard.DashBoardFragment"
         android:label="fragment_dash_board"
         tools:layout="@layout/fragment_dash_board" />
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="iti.workshop.newApp.registration.RegistrationFragment"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration" />
 
 </navigation>
