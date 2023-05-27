@@ -1,7 +1,7 @@
 package iti.workshop.data.source.remote.retrofit
 
 
-import iti.workshop.data.source.remote.models.news.NewsResponse
+import iti.workshop.data.source.dto.NewsResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
