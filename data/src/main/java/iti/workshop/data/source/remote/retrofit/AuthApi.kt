@@ -19,8 +19,8 @@ interface AuthApi {
         @Body body: RegisterBody, @Query("key") apikey: String = Constants.AUTH_API_KEY
     ): RegisterResponse
 
-    @POST(Constants.LOGIN_API_URL + "?4564654" + Constants.AUTH_API_KEY)
+    @POST(Constants.LOGIN_API_URL)
     suspend fun loginUser(
-        @Body body: LoginBody
+        @Body body: LoginBody, @Query("key") apikey: String = Constants.AUTH_API_KEY
     ): Login
 }
