@@ -5,6 +5,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
     private val retrofit: Retrofit by lazy {
@@ -15,9 +16,10 @@ object RetrofitInstance {
             .build()
     }
 
-    val api: CallApi by lazy {
-        retrofit.create(CallApi::class.java)
+    val authApi: AuthApi by lazy {
+        retrofit.create(AuthApi::class.java)
     }
+
 
 
     private fun cashAndLoggerManager(): OkHttpClient {
@@ -25,7 +27,12 @@ object RetrofitInstance {
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
-        return OkHttpClient.Builder()
+        return OkHttpClient
+
+            .Builder()
+            .connectTimeout(10,TimeUnit.SECONDS)
+            .readTimeout(10,TimeUnit.SECONDS)
+            .writeTimeout(10,TimeUnit.SECONDS)
             .addInterceptor(interceptor)
             .build()
     }
