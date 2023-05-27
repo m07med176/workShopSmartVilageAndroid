@@ -15,4 +15,7 @@ interface ArticlesDao {
 
     @Delete
     suspend fun deleteArticle(article: Article)
+
+    @Query("SELECT EXISTS(SELECT 1 FROM article WHERE title = :title)")
+    fun isExists(title: String): Flow<Boolean>
 }
