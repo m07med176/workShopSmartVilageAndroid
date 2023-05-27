@@ -7,14 +7,6 @@ import iti.workshop.data.source.local.ILocalDataSource
 import kotlinx.coroutines.flow.Flow
 
 interface IRepository{
-    fun login(username:String, password:String)
-
-    fun signUp()
-
-    fun logout()
-
-
-
     fun getArticles(): Flow<List<Article>>
 
     suspend fun insertArticle(article: Article)
