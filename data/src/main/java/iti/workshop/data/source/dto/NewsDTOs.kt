@@ -1,6 +1,7 @@
 package iti.workshop.data.source.dto
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 
@@ -8,14 +9,13 @@ import androidx.room.PrimaryKey
 data class Article(
     @PrimaryKey(autoGenerate = true)
     val id:Int,
-    val author: String,
-    val content: String,
-    val description: String,
-    val publishedAt: String,
-    val source: Source,
-    val title: String,
-    val url: String,
-    val urlToImage: String
+    val author: String?=null,
+    val content: String?=null,
+    val description: String?=null,
+    val publishedAt: String?=null,
+    val title: String?=null,
+    val url: String?=null,
+    val urlToImage: String?=null
 )
 
 data class NewsResponse(
