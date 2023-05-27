@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object NewsRetrofitInstance {
     private val retrofitNews: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(Constants.NEWS_URL)
             .client(cashAndLoggerManager())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
