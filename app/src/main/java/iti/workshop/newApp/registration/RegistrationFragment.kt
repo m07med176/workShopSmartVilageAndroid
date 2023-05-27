@@ -16,6 +16,7 @@ import iti.workshop.newApp.MainActivity
 import iti.workshop.newApp.R
 import iti.workshop.newApp.databinding.FragmentLoginBinding
 import iti.workshop.newApp.databinding.FragmentRegistrationBinding
+import iti.workshop.newApp.networkconnection.NetWorkChecker
 
 import iti.workshop.newApp.states.RegisterState
 import iti.workshop.newApp.utils.ValidationReg
@@ -24,29 +25,45 @@ import kotlinx.coroutines.launch
 
 class RegistrationFragment : Fragment() {
 
-  lateinit var binding : FragmentRegistrationBinding
-
+    lateinit var binding: FragmentRegistrationBinding
+    lateinit var networkState: NetWorkChecker
     val viewModel: RegistrationViewModel by viewModels { RegistrationViewModel.Factory }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentRegistrationBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = this
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        networkState = NetWorkChecker(requireContext())
         binding.submit.setOnClickListener(View.OnClickListener {
-            if (ValidationReg.validateData(
-                    binding.passWord.text.toString(), binding.email.text.toString(), binding.confPassword.text.toString()
-                )
-            ) {
+            if(!ValidationReg.validateData(
+                    binding.passWord.text.toString(),
+                    binding.email.text.toString(),
+                    binding.confPassword.text.toString()
+                ) ){
+                Toast.makeText(
+                    requireContext(), "Please check your email and password", Toast.LENGTH_LONG
+                ).show()
+                return@OnClickListener
+            }
+            if(!networkState.checkForInternet()){
+                Toast.makeText(
+                    requireContext(), "Please check your network connection", Toast.LENGTH_LONG
+                ).show()
+                return@OnClickListener
+        }
+
+
                 lifecycleScope.launch {
                     viewModel.regUser(
                         RegisterBody(
@@ -87,13 +104,9 @@ class RegistrationFragment : Fragment() {
                 }
 
 
-            } else {
 
-            }
         })
     }
-
-
 
 
 }
