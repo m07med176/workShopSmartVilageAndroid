@@ -13,11 +13,10 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface AuthApi {
-    @POST(Constants.REGISTER_API_URL )
+    @POST(Constants.REGISTER_API_URL)
 
     suspend fun register(
-        @Body body: RegisterBody
-,@Query("key")apikey:String=Constants.AUTH_API_KEY
+        @Body body: RegisterBody, @Query("key") apikey: String = Constants.AUTH_API_KEY
     ): RegisterResponse
 
     @POST(Constants.LOGIN_API_URL + "?4564654" + Constants.AUTH_API_KEY)
