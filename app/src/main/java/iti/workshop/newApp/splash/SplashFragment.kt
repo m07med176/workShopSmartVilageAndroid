@@ -40,7 +40,7 @@ class SplashFragment : Fragment() {
             if (it)
                 findNavController().navigate(R.id.action_splashFragment_to_dashBoardFragment)
             else
-                findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+                findNavController().navigate(R.id.action_splashFragment_to_registrationFragment)
 
         }
 

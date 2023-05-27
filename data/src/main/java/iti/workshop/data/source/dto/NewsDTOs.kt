@@ -3,6 +3,7 @@ package iti.workshop.data.source.dto
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 
 @Entity(tableName = "article")
@@ -16,7 +17,7 @@ data class Article(
     val title: String?=null,
     val url: String?=null,
     val urlToImage: String?=null
-)
+):Serializable
 
 data class NewsResponse(
     val articles: List<Article>,
