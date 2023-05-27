@@ -78,7 +78,7 @@ class LoginFragment : Fragment() {
                           is LoginState.Success -> {
                               Toast.makeText(requireContext(), "Done", Toast.LENGTH_LONG).show()
                               Log.i("TAG2", "DONE: ")
-                              findNavController().navigate(R.id.action_loginFragment_to_dashBoardFragment)
+                              findNavController().navigate(R.id.action_loginFragment_to_newsListFragment)
                           }
 
                           is LoginState.Loading -> {

@@ -14,11 +14,11 @@
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_dashBoardFragment"
-            app:destination="@id/dashBoardFragment" />
-        <action
             android:id="@+id/action_loginFragment_to_registrationFragment2"
             app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_newsListFragment"
+            app:destination="@id/newsListFragment" />
     </fragment>
 
     <fragment
@@ -32,23 +32,18 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/splashFragment" />
         <action
-            android:id="@+id/action_splashFragment_to_dashBoardFragment"
-            app:destination="@id/dashBoardFragment"
-            app:popUpTo="@id/splashFragment" />
-        <action
             android:id="@+id/action_splashFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_newsListFragment"
+            app:destination="@id/newsListFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/dashBoardFragment"
         android:name="iti.workshop.newApp.dashboard.DashBoardFragment"
         android:label="fragment_dash_board"
-        tools:layout="@layout/fragment_dash_board">
-        <action
-            android:id="@+id/action_dashBoardFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_dash_board"/>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="iti.workshop.newApp.favorite.FavoriteFragment"
@@ -81,6 +76,10 @@
         android:id="@+id/newsListFragment"
         android:name="iti.workshop.newApp.home.NewsListFragment"
         android:label="fragment_news_list"
-        tools:layout="@layout/fragment_news_list" />
+        tools:layout="@layout/fragment_news_list" >
+        <action
+            android:id="@+id/action_newsListFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
 
 </navigation>

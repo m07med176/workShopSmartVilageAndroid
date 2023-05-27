@@ -42,7 +42,7 @@ class SplashFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.hide()
         viewModel.seamlessDetector {
             if (it)
-               findNavController().navigate(R.id.action_splashFragment_to_dashBoardFragment)
+               findNavController().navigate(R.id.action_splashFragment_to_newsListFragment)
 
             else
                 findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
